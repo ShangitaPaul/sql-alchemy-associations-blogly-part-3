@@ -1,0 +1,38 @@
+<!--This template is used to display detailed information about a specific user.
+It should show the user's full name, first name, last name, and image URL.
+The template should also provide links to the user's edit page (users_edit route) and the delete button (users_destroy route).-->
+
+{% extends 'base.html' %}
+
+{% block title %}{{ user.full_name }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+  {% if user.image_url %}
+  <div class="col-sm-2 col-6">
+    <img src="{{ user.image_url }}"
+         alt="{{ user.full_name }}"
+         class="img-fluid">
+  </div>
+  {% endif %}
+
+  <div class="col-sm-10 col-12">
+    <h1>{{ user.full_name }}</h1>
+
+    <form>
+      <button class="btn btn-primary btn-sm"
+              formaction="/users/{{ user.id }}/edit"
+              formmethod="GET">Edit
+      </button>
+      <button class="btn btn-danger btn-sm"
+              formaction="/users/{{ user.id }}/delete"
+              formmethod="POST">Delete
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

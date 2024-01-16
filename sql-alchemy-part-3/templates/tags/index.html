@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block content %}
+
+<!-- Heading for the tags index page -->
+<h1>Tags</h1>
+
+<!-- Unordered list to display all tags with links to their detailed views -->
+<ul>
+  <!-- Iterate over each tag in the provided list -->
+  {% for tag in tags %}
+    <!-- List item with a link to the detailed view of the tag -->
+    <li><a href="/tags/{{ tag.id }}">{{ tag.name }}</a></li>
+  {% endfor %}
+</ul>
+
+<!-- Paragraph with a button to add a new tag -->
+<p><a class="btn btn-primary" href="/tags/new">Add Tag</a></p>
+
+{% endblock %}

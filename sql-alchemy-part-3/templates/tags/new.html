@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Tag{% endblock %}
+
+{% block content %}
+
+<!-- Heading for creating a new tag -->
+<h1>Create a tag</h1>
+
+<!-- Form for adding a new tag, using POST method with action to create the tag -->
+<form method="POST" action="/tags/new">
+
+  <!-- Form group for the tag name -->
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label d-flex align-items-center">
+      Name
+    </label>
+    <div class="col-sm-10">
+      <!-- Input field for entering the tag name with a placeholder -->
+      <input type="text" class="form-control" id="name" name="name"
+             placeholder="Enter a name for the tag">
+    </div>
+  </div>
+
+  <!-- Form group for selecting posts using checkboxes -->
+  <div class="form-check form-group row">
+    <!-- Iterate over available posts -->
+    {% for post in posts %}
+    <div>
+      <!-- Checkbox for each post with its corresponding label -->
+      <input class="form-input"
+             type="checkbox"
+             value="{{ post.id }}"
+             id="post_{{ post.id }}"
+             name="posts">
+      <label class="form-check-label" for="post_{{ post.id }}">
+        {{ post.title }}
+      </label>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Form group for Cancel and Add buttons -->
+  <div class="mt-3 form-group row">
+    <div class="ml-auto mr-3">
+      <!-- Cancel button to return to the tags index -->
+      <a href="/tags" class="btn btn-outline-primary">Cancel</a>
+      <!-- Add button to submit the form and create the new tag -->
+      <button type="submit" class="btn btn-success">Add</button>
+    </div>
+  </div>
+
+</form>
+
+{% endblock %}
