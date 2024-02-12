@@ -1,0 +1,23 @@
+<!--This template is used to display information about all users.
+It should list all users in alphabetical order by last name and first name.
+Each user's name should be a link to their detail page (users_show route).
+The template should also provide a link to the "Add User" form (users_new_form route).-->
+{% extends 'base.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+<ul>
+  {% for user in users %}
+  <li>
+    <a href="/users/{{ user.id }}">{{ user.full_name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<p><a class="btn btn-sm btn-secondary" href="/users/new">Add user</a></p>
+
+{% endblock %}

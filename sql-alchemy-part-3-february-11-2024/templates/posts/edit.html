@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block content %}
+
+<!-- Heading for editing a post -->
+<h1>Edit Post</h1>
+
+<!-- Form for editing a post, using POST method with action to update the post -->
+<form method="POST" action="/posts/{{ post.id }}/edit">
+
+  <!-- Form group for the post title -->
+  <div class="form-group row">
+    <label for="title" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <!-- Input field for editing the post title with the current value -->
+      <input class="form-control" id="title" name="title" value="{{ post.title }}">
+    </div>
+  </div>
+
+  <!-- Form group for the post content -->
+  <div class="form-group row">
+    <label for="content" class="col-sm-2 col-form-label">Post Content</label>
+    <div class="col-sm-10">
+      <!-- Textarea for editing the post content with the current value -->
+      <textarea class="form-control"
+                id="content"
+                name="content">{{ post.content }}</textarea>
+    </div>
+  </div>
+
+  <!-- Form group for selecting tags using checkboxes -->
+  <div class="form-check">
+    <!-- Iterate over available tags -->
+    {% for tag in tags %}
+    <div>
+      <!-- Checkbox for each tag with its corresponding label -->
+      <input class="form-check-input"
+             type="checkbox"
+             value="{{ tag.id }}"
+             id="tag_{{ tag.id }}"
+             {% if tag in post.tags %}checked{% endif %}
+             name="tags">
+      <label class="form-check-label" for="tag_{{ tag.id }}">
+        {{ tag.name }}
+      </label>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Form group for Cancel and Edit buttons -->
+  <div class="form-group row">
+    <div class="ml-auto mr-3">
+      <!-- Cancel button to return to the user's detailed view -->
+      <a href="/users/{{ post.user_id }}" class="btn btn-outline-info">
+        Cancel
+      </a>
+      <!-- Edit button to submit the form and update the post -->
+      <button type="submit" class="btn btn-success">
+        Edit
+      </button>
+    </div>
+  </div>
+
+</form>
+
+{% endblock %}
